@@ -384,11 +384,13 @@ body {
   background-repeat: no-repeat;
   margin-bottom: 48px;
   margin-top: 48px;
-  transform: matrix(0.9, 0.3, -0.3, 0.9, 0, 0);
+  border-radius: 50px;
+  transition: all 0.2s;
 }
 
 .len-block-2 {
   align-self: center;
+  border-radius: 50px;
 }
 
 .lens-intro {
@@ -448,17 +450,15 @@ body {
   font-size: 27px;
   font-weight: 600;
 }
-.section-image-container{
+.section-image-container {
   width: 100%;
   height: 100%;
-
 }
 .section-image {
   background-image: url("https://www.apple.com//v/iphone-11-pro/c/images/overview/camera/camera_three_lens_system_phone__cokiuc6tixw2_large.jpg");
   background-repeat: no-repeat;
- width: 100%;
+  width: 100%;
   height: 100%;
-
 }
 .fov-container {
   width: 100%;
@@ -551,6 +551,9 @@ body {
 .footer {
   height: 400px;
   width: 100%;
+  background-color: black;
+  z-index: 3;
+  position: relative;
 }
 
 .scroll-magic-sticky {
@@ -566,20 +569,42 @@ body {
   width: 100%;
   height: 100vh;
 }
-
-.video {
-  width: 100%;
-  height: 100vh;
-  position: relative;
+.video-4k-container{
+  background-color: black;
   z-index: 3;
+  position: relative;
+  overflow: hidden;
 }
-
-.video video {
+.video-container {
+  background-color: black;
+  z-index: 3;
+  position: relative;
+  transform: scale(1.2, 1.2);
+  transition: all 1s;
+  /* height: 100vh; */
+}
+.video {
+  height: 100%;
   width: 100%;
-
+  position: absolute;
+  z-index: 3;
+  padding-top: 10px;
 }
 
-/* .sticky-fov{
-  position: fixed;
-
-} */
+.background {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.background img {
+  width: 100%;
+  height: auto;
+}
+.video video {
+  padding-bottom: 60px;
+  width: 95%;
+  height: 95%;
+  position: absolute;
+}

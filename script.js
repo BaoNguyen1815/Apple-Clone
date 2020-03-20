@@ -5,14 +5,9 @@ window.addEventListener("scroll", function(e) {
   scrollMagic();
   fixedGallery();
   changeImageGallery();
+  moveCamera();
+  fixedVideo();
 });
-
-// window.onload = ()=>{
-//   document.getElementsByClassName("section-content-container")[0].addEventListener("wheel",function(e){
-//     e.preventDefault();
-//     console.log(e.deltaY)
-// });
-// }
 
 function navbarFixed() {
   const height = document.getElementsByClassName("navbar-container")[0]
@@ -54,6 +49,31 @@ function relativeIntro() {
   }
 }
 
+function moveCamera() {
+  const container = document.getElementsByClassName("iphone-lens-container")[0];
+  const top = container.getBoundingClientRect().top;
+  const bottom = container.getBoundingClientRect().bottom;
+  if (top > -1000 && top < 1000) {
+    // for (let i = 0; i <= 2; i++) {
+    //   document.getElementsByClassName("len")[
+    //     i
+    //   ].style.transform = `matrix(${0.9 +
+    //     ((top + 1000) * 0.09) / 2000}, ${(0.5 * top) / 1000}, ${(-0.5 * top) /
+    //     1000},${0.9 + ((top + 1000) * 0.09) / 2000}, 0, 0)`;
+    // }
+    document.getElementsByClassName(
+      "len-block-1"
+    )[0].style.transform = `matrix(${0.96 +
+      ((top + 1000) * 0.03) / 2000}, ${(0.3 * top) / 1000}, ${(-0.3 * top) /
+      1000},${0.96 + ((top + 1000) * 0.03) / 2000}, 0, 0)`;
+    document.getElementsByClassName(
+      "len-block-2"
+    )[0].style.transform = `matrix(${0.96 +
+      ((top + 1000) * 0.03) / 2000}, ${(0.3 * top) / 1000}, ${(-0.3 * top) /
+      1000},${0.96 + ((top + 1000) * 0.03) / 2000}, 0, 0)`;
+  }
+}
+
 function translateCloserLook() {
   const top = this.document
     .getElementsByClassName("closer-look-container")[0]
@@ -85,19 +105,19 @@ function translateCloserLook() {
 }
 
 function scrollMagic() {
-  console.log(window)
   const element = document.getElementById("scroll-magic-1");
   const nextElement = document.getElementsByClassName("fov-container")[0];
   if (element.getBoundingClientRect().top < 100) {
     document
       .getElementById("section-invisible-block")
       .classList.add("display-invisible-block");
-      // const image= document
-      // .getElementsByClassName("section-image-container")[0];
-      // image.style.position = "fixed";
-      // image.style.top = "100px";
-      // image.style.left = `${995}px`;
-      document.getElementsByClassName("section-content-container")[0]
+    // const image= document
+    // .getElementsByClassName("section-image-container")[0];
+    // image.style.position = "fixed";
+    // image.style.top = "100px";
+    // image.style.left = `${995}px`;
+    document
+      .getElementsByClassName("section-content-container")[0]
       .classList.add("scroll-magic-sticky");
   }
   if (nextElement.getBoundingClientRect().top >= window.innerHeight) {
@@ -132,8 +152,7 @@ function changeImageGallery() {
   const telephotoBar = document.getElementById("telephoto");
   const wideBar = document.getElementById("wide");
   const ultraWideBar = document.getElementById("ultra-wide");
-
-  if (window.scrollY < 6050 + 600) {
+  if (window.pageYOffset < 6050 + 600) {
     telephoto.style.opacity = 1;
     wide.style.opacity = 0;
     ultraWide.style.opacity = 0;
@@ -142,22 +161,37 @@ function changeImageGallery() {
     wideBar.classList.remove("fov-bar-item-active");
     ultraWideBar.classList.remove("fov-bar-item-active");
   }
-  if (window.scrollY > 6650 && window.scrollY < 7250) {
+  if (window.pageYOffset > 6650 && window.pageYOffset < 7250) {
     telephoto.style.opacity = 0;
     wide.style.opacity = 1;
     ultraWide.style.opacity = 0;
 
-     telephotoBar.classList.remove("fov-bar-item-active");
-     wideBar.classList.add("fov-bar-item-active");
-     ultraWideBar.classList.remove("fov-bar-item-active");
+    telephotoBar.classList.remove("fov-bar-item-active");
+    wideBar.classList.add("fov-bar-item-active");
+    ultraWideBar.classList.remove("fov-bar-item-active");
   }
-  if (window.scrollY > 7250) {
+  if (window.pageYOffset > 7250) {
     telephoto.style.opacity = 0;
     wide.style.opacity = 0;
     ultraWide.style.opacity = 1;
 
-     telephotoBar.classList.remove("fov-bar-item-active");
-     wideBar.classList.remove("fov-bar-item-active");
-     ultraWideBar.classList.add("fov-bar-item-active");
+    telephotoBar.classList.remove("fov-bar-item-active");
+    wideBar.classList.remove("fov-bar-item-active");
+    ultraWideBar.classList.add("fov-bar-item-active");
   }
+}
+
+function fixedVideo(){
+  const container = document.getElementsByClassName("video-4k-container")[0];
+  const top = container.getBoundingClientRect().top;
+  const element = document.getElementsByClassName("video-container")[0];
+  if(top < 100){
+    element.style.position = "fixed";
+    element.style.left = "50%";
+    element.style.transform = "translate(-50%, 0)"
+    element.style.top="100px";
+  }
+  // else{
+  //  element.removeAttribute("style")
+  // }
 }
