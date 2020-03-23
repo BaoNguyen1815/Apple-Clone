@@ -7,6 +7,7 @@ window.addEventListener("scroll", function(e) {
   changeImageGallery();
   moveCamera();
   fixedVideo();
+  zoomVideo();
 });
 
 function navbarFixed() {
@@ -181,17 +182,22 @@ function changeImageGallery() {
   }
 }
 
-function fixedVideo(){
+function fixedVideo() {
   const container = document.getElementsByClassName("video-4k-container")[0];
   const top = container.getBoundingClientRect().top;
   const element = document.getElementsByClassName("video-container")[0];
-  if(top < 100){
-    element.style.position = "fixed";
-    element.style.left = "50%";
-    element.style.transform = "translate(-50%, 0)"
-    element.style.top="100px";
+  if (top < 100) {
+    element.classList.add("fixed-video");
   }
-  // else{
-  //  element.removeAttribute("style")
-  // }
+}
+
+function zoomVideo() {
+  const element = document.getElementsByClassName("video-container")[0];
+  if (window.pageYOffset > 8900 && window.pageYOffset < 10000) {
+    element.style.width = `${-window.pageYOffset / 22 + 504}%`;
+    console.log(`${-window.pageYOffset / 22 + 504}%`);
+  }
+  if (window.pageYOffset < 8900) {
+    element.classList.remove("fixed-video");
+  }
 }

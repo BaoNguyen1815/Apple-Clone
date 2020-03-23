@@ -574,13 +574,15 @@ body {
   z-index: 3;
   position: relative;
   overflow: hidden;
+  height: 200vh;
 }
 .video-container {
+  width: 100%;
   background-color: black;
   z-index: 3;
   position: relative;
   transform: scale(1.2, 1.2);
-  transition: all 1s;
+  transition: left 1s;
   /* height: 100vh; */
 }
 .video {
@@ -607,4 +609,11 @@ body {
   width: 95%;
   height: 95%;
   position: absolute;
+}
+.fixed-video{
+  position: fixed;
+  left: 50%;
+  top: 100px;
+  transform: translate(-50%,0);
+
 }
